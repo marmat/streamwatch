@@ -1,3 +1,7 @@
 *.pyc
 .DS_Store
 *.sublime-workspace
+*.min.js
+*_generated.js
+*-deps.js
+assets/
