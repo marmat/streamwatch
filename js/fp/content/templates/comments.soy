@@ -1,0 +1,21 @@
+{namespace fp.content.templates.comments autoescape="contextual"}
+
+/**
+ * The template to show a comment as a activity-like object in a stream.
+ * @param data {fp.data.Comment} A comment data object to use.
+ */
+{template .comment}
+	{call fp.content.templates.common.streamComponent}
+		{param actor: $data.actor /}
+		{param url: $data.inReplyTo.url /}
+		{param published: $data.publishedFormatted /}
+		{param additionalHeaderHtml}
+			Comment
+		{/param}
+		{param contentHtml}
+			<div class="fpCommentContentInner">
+				{$data.content|noAutoescape}
+			</div>
+		{/param}
+	{/call}
+{/template}

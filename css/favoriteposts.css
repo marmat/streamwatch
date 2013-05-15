@@ -1,0 +1,288 @@
+/* Styles for the Stream */
+.fpStream {
+  margin: 0 auto;
+  padding: 19px;
+  position: relative;
+  width: 600px;
+}
+
+
+/* Styles for the Activity Template */
+.fpStreamComponent {
+  background-color: #fff;
+  box-sizing: border-box;
+  clear: both;
+  line-height: 1.4;
+  margin: 10px 0 20px 68px;
+  position: relative;
+  width: 497px;
+  word-wrap: break-word;
+}
+
+.fpStreamComponentActorImage {
+  border-radius: 4px;
+  float: left;
+  margin-left: -68px;
+}
+
+.fpStreamComponentSpeechBubbleArrow {
+  background-image: url('../img/misc.png');
+  background-position-y: 0;
+  height: 21px;
+  left: -10px;
+  position: absolute;
+  top: 15px;
+  width: 10px;
+}
+
+.fpStreamComponentContent {
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-radius: 3px;
+  position: relative;
+  vertical-align: top;
+}
+
+.fpStreamComponentContentHead {
+  padding: 16px 16px 0 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fpStreamComponentContentMain {
+  padding: 3px 16px 0 16px;
+  text-overflow: ellipsis;
+}
+
+.fpStreamComponentContentFoot {
+  border-top: 1px solid #ddd;
+  height: 38px;
+}
+
+.fpHeadlineActor {
+  font-weight: bold;
+}
+
+.fpHeadlineMeta {
+  margin-left: 10px;
+}
+
+.fpHeadlineMeta,
+.fpStreamComponentPublished {
+  color: #999;
+}
+
+.fpHeadlineLink {
+  color: black;
+  transition: color .218s;
+}
+
+.fpStreamComponentHovered .fpHeadlineLink,
+.fpStreamComponentHovered .fpHeadlineLink {
+  color: #36c;
+}
+
+.fpHeadlineMetaSmall {
+  font-size: 11px;
+}
+
+.fpFilterMenu {
+  display: inline-block;
+}
+
+.fpMenuBar > .fpCheckbox {
+  display: inline-block;
+  margin: 0 0 0 20px;
+}
+
+.fpActivityContentInner,
+.fpCommentContentInner {
+  padding-bottom: 12px;
+}
+
+.fpStreamComponentOptionsMenuContainer {
+  float: right;
+  margin: 16px 16px 0 0;
+}
+
+.fpStreamComponentOptionsMenu {
+  background-image: url('../img/misc.png');
+  background-position-y: -37px;
+  cursor: pointer;
+  height: 13px;
+  opacity: 0.55;
+  outline: 0;
+  width: 13px;
+}
+
+.fpStreamComponentOptionsMenu:hover {
+  opacity: 1;
+}
+
+
+/* Styles for Reshares */
+.fpActivityReshare {
+  border-top: 1px solid #ccc;
+}
+
+.fpReshareActorImage {
+  border-radius: 3px;
+  float: left;
+  height: 32px;
+  margin: 3px 12px 12px 0;
+  width: 32px;
+}
+
+.fpReshareHead {
+  padding-bottom: 2px;
+  padding-top: 12px;
+}
+
+.fpReshareContent {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 0 12px 0;
+}
+
+
+/* Styles for Activity attachments */
+.fpAttachmentArticle {
+  border-top: 1px solid #e9e9e9;
+  padding: 16px 0;
+  overflow: hidden;
+}
+
+.fpActivityAttachment-video {
+  margin-bottom: -4px;
+}
+
+.fpAttachmentDisplayName {
+  font-weight: bold;
+}
+
+.fpAttachmentContent {
+  padding-top: 5px;
+}
+
+.fpAttachmentFavicon {
+  float: left;
+  margin-right: 5px;
+  margin-top: 1px;
+  height: 16px;
+  width: 16px;
+}
+
+.fpAttachmentArticleImage {
+  float: left;
+  margin-right: 16px;
+  max-width: 150px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+.fpAttachmentArticleImageContent {
+  max-width: 150px;
+}
+
+.fpAttachmentArticleMain {
+  overflow: hidden;
+}
+
+.fpAttachmentFullWidth {
+  text-align:center;
+  margin-left: -17px;
+  width: 497px !important;
+}
+
+.fpAttachmentPhoto {
+  overflow:hidden;
+  position:relative;
+}
+
+.fpPhotoWrap, .fpPhotoShadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.fpPhotoWrap {
+  background-color:#f3f3f3;
+}
+
+.fpPhotoShadow {
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.4);
+}
+
+.fpPhoto {
+  width: auto;
+}
+
+
+/* Styles for Dialogs */
+.fpDialogBackdrop {
+  background-color: #666;
+  bottom: 0;
+  left: 0;
+  opacity: .5;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2100;
+}
+
+.fpDialog {
+  background-color: #fff;
+  border: 1px solid #777;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  left: 0;
+  line-height: 1.4;
+  margin: auto;
+  padding: 30px 42px;
+  position: absolute;
+  right: 0;
+  top: 30%;
+  width: 400px;
+  z-index: 2101;
+}
+
+.fpDialogTitle {
+  font-size: 16px;
+  line-height: 32px;
+  vertical-align: baseline;
+}
+
+.fpDialogContent {
+  margin-top: 25px;
+}
+
+.fpDialogClose {
+  cursor: default;
+  height: 11px;
+  opacity: .7;
+  padding: 17px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+}
+
+.fpDialogClose:hover {
+  opacity: 1;
+}
+
+
+/* Retina Support */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+
+  .fpIconSettingsGear,
+  .goog-checkbox-checked,
+  .fpStreamComponentOptionsMenu,
+  .fpStreamComponentSpeechBubbleArrow {
+    background-image: url('../img/misc@2x.png');
+    background-size: 17px 67px;
+  }
+}

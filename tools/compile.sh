@@ -1,5 +1,6 @@
 closure-library/closure/bin/build/closurebuilder.py \
   -f "--js=closure-library/closure/goog/deps.js" \
+  -f "--js=js/gapi-externs.js" \
   -f "--js=js/sw-deps.js" \
   --root=closure-library/ \
   --root=js \

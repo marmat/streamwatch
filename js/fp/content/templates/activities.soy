@@ -1,0 +1,145 @@
+{namespace fp.content.templates.activities autoescape="contextual"}
+
+/**
+ * A generic activity template that resembles actual Google+ activities.
+ * @param data {fp.data.Activity} An activity data object to use.
+ */
+{template .activity}
+  {call fp.content.templates.common.streamComponent}
+    {param actor: $data.actor /}
+    {param url: $data.url /}
+    {param published: $data.publishedFormatted /}
+    {param contentHtml}
+      {if $data.verb == 'share'}
+        <div class="fpActivityContentInner">
+          {$data.annotation|noAutoescape}
+        </div>
+        {call .reshare_}
+          {param data: $data.object /}
+        {/call}
+      {else}
+        <div class="fpActivityContentInner">
+          {$data.object.content|noAutoescape}
+        </div>
+      {/if}
+
+      {foreach $attachment in $data.object.attachments}
+        {call .attachment_}
+          {param attachment: $attachment /}
+        {/call}
+      {/foreach}
+    {/param}
+  {/call}
+{/template}
+
+
+/**
+ * Represents a Reshare inside an activity.
+ * @param data {fp.data.Activity.object} The reshare data to render.
+ */
+{template .reshare_ private="true"}
+  <div class="fpActivityReshare">
+    <div class="fpReshareHead">
+      <img src="{$data.actor.image.url}" class="fpReshareActorImage"
+          width="32px" height="32px" title="{$data.actor.displayName}">
+      {call fp.content.templates.common.headline}
+        {param actor: $data.actor /}
+        {param regularSizeMeta: true /}
+        {param metaHtml}
+          originally shared this <a href="{$data.url}" class="fpHeadlineLink">post</a>:
+        {/param}
+      {/call}
+    </div>
+    <div class="fpReshareContent">
+      {$data.content|noAutoescape}
+    </div>
+  </div>
+{/template}
+
+
+/**
+ * Renders a single attachment in a type-appropriate manner.
+ * @param attachment {fp.data.Attachment} The attachment to render.
+ */
+{template .attachment_ private="true"}
+  <div class="fpActivityAttachment fpActivityAttachment-{$attachment.objectType}">
+    {switch $attachment.objectType}
+      {case 'article'}
+        {call .article_ data="all" /}
+      {case 'video'}
+        {call .video_ data="all" /}
+      {case 'photo'}
+        {call .photo_ data="all" /}
+      {default}
+        {call .article_ data="all" /}
+    {/switch}
+  </div>
+{/template}
+
+
+/**
+ * Renders an article attachment
+ * @param attachment {fp.data.Attachment} The attachment to render.
+ */
+{template .article_ private="true"}
+  <div class="fpAttachmentArticle">
+    {if $attachment.image}
+      <div class="fpAttachmentArticleImage">
+        <a href="{$attachment.url}">
+          <img class="fpAttachmentArticleImageContent"
+              src="{$attachment.image.url}">
+        </a>
+      </div>
+    {/if}
+
+    <div class="fpAttachmentArticleMain">
+      <img class="fpAttachmentFavicon"
+          src="//s2.googleusercontent.com/s2/favicons?domain={$attachment.domain}">
+      <a href="{$attachment.url}" class="fpAttachmentDisplayName">
+        {$attachment.displayName}{sp}&raquo;
+      </a>
+      <div class="fpAttachmentContent">{$attachment.content}</div>
+    </div>
+  </div>
+{/template}
+
+
+/**
+ * Renders a photo attachment
+ * @param attachment {fp.data.Attachment} The attachment to render.
+ */
+{template .photo_ private="true"}
+  {if $attachment.embed and $attachment.image}
+    <div class="fpAttachmentPhoto fpAttachmentFullWidth" style="height:{$attachment.embed.height}px">
+      <a href="{$attachment.embed.url}" target="_blank">
+        <div class="fpPhotoWrap">
+          <img src="{$attachment.image.url}" class="fpPhoto" />
+        </div>
+        <div class="fpPhotoShadow"></div>
+      </a>
+    </div>
+  {else}
+    // Fallback to simple link
+    {call .article_ data="all" /}
+  {/if}
+{/template}
+
+
+/**
+ * Renders a video attachment
+ * @param attachment {fp.data.Attachment} The attachment to render.
+ */
+{template .video_ private="true"}
+  {if $attachment.embed}
+    <iframe
+      class="fpAttachmentFullWidth"
+      width="497"
+      height="{round(497 / $attachment.embed.width * $attachment.embed.height)}"
+      src="{$attachment.embed.url}"
+      frameborder="0">
+    </iframe>
+  {else}
+    // Fallback to simple link
+    {call .article_ data="all" /}
+  {/if}
+{/template}

@@ -1,0 +1,96 @@
+{namespace fp.content.templates.common autoescape="contextual"}
+
+/**
+ * A generic activity template that resembles actual Google+ activities.
+ * @param actor {Object} The person acting on this content.
+ * @param contentHtml {string} The main content of this component.
+ * @param? additionalHeaderHtml {string} Content to show next to the regular header.
+ * @param? url {string} Permalink to the content.
+ * @param? published {string} Timestamp to show in the header.
+
+ */
+{template .streamComponent}
+  <div class="fpStreamComponent">
+    <div class="fpStreamComponentContent">
+      <div class="fpStreamComponentOptionsMenuContainer"></div>
+      <a href="{$actor.url}">
+        <img src="{$actor.image.url|noAutoescape}"
+            class="fpStreamComponentActorImage"
+            width="48px" height="48px"
+            oid="{$actor.id}">
+      </a>
+      <div class="fpStreamComponentSpeechBubbleArrow"></div>
+      <div class="fpStreamComponentContentHead">
+        {call .componentHead_}
+          {param actor: $actor /}
+          {param published: $published /}
+          {param url: $url /}
+          {param additionalHeaderHtml: $additionalHeaderHtml /}
+        {/call}
+      </div>
+      <div class="fpStreamComponentContentMain">
+        {$contentHtml|noAutoescape}
+      </div>
+      <div class="fpStreamComponentContentFoot">
+        <div></div>
+      </div>
+    </div>
+  </div>
+{/template}
+
+
+/**
+ * The head line of an activity.
+ * @param actor {fp.data.Activity.actor} The person acting on the particular
+ *     post or comment.
+ * @param? published {number} Timestamp of when the post has been made.
+ * @param? url {string} Permalink to the content.
+ * @param? additionalHeaderHtml {string} Content to show next to the regular header.
+ */
+{template .componentHead_ private="true"}
+  {call .headline}
+    {param actor: $actor /}
+    {param metaHtml}
+      {if $url}
+        <a href="{$url}" class="fpStreamComponentPublished">
+      {/if}
+
+      {if $published}
+        {$published}
+      {elseif $url}
+        Link to original activity
+      {/if}
+
+      {if $url}
+        </a>
+      {/if}
+
+      {if $additionalHeaderHtml}
+        <span>&nbsp;&nbsp;-&nbsp;&nbsp;{$additionalHeaderHtml|noAutoescape}</span>
+      {/if}
+    {/param}
+  {/call}
+{/template}
+
+
+/**
+ * Renders a generic headline of an activity or reshare.
+ * @param actor {fp.data.Activity.actor} The person acting on the particular
+ *     post or comment.
+ * @param metaHtml {string} Content to show next to the actor.
+ * @param? regularSizeMeta {boolean} Whether to show the metadata in regular
+ *     rather than smaller size.
+ */
+{template .headline}
+  <a href="{$actor.url}"
+      oid="{$actor.id}"
+      class="fpHeadlineActor fpHeadlineLink">
+    {$actor.displayName}
+  </a>
+
+  {if $metaHtml}
+    <span class="fpHeadlineMeta{if not $regularSizeMeta}{sp}fpHeadlineMetaSmall{/if}">
+      {$metaHtml|noAutoescape}
+    </span>
+  {/if}
+{/template}

@@ -1,0 +1,18 @@
+{namespace fp.content.templates.buttons autoescape="contextual"}
+
+/**
+ * A simple action button as it can be found in the button bar below activities.
+ * @param iconClass {string} The CSS class to use for the icon.
+ * @param? tooltip {string} A tooltip to show on hover.
+ * @param? small {boolean} Whether to render the button in a small state.
+ */
+{template .actionButton}
+  <div class="{if $small}fpActionButtonSmall{else}fpActionButton{/if}"
+      role="button"
+      {if $tooltip}
+        aria-label="{$tooltip}"
+        {if $small}title{else}data-tooltip{/if}="{$tooltip}"
+      {/if}>
+    <span class="fpActionButtonIcon {$iconClass}"></span>
+  </div>
+{/template}

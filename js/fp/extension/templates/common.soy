@@ -1,0 +1,26 @@
+{namespace fp.extension.templates.common autoescape="contextual"}
+
+
+/**
+ * A generic Dialog template.
+ * @param? title {string} The dialog title
+ * @param? description {string} Text to show below the title.
+ * @param? contentHtml {string} Content to show inside the dialog.
+ */
+{template .dialog}
+  <div>
+    <div class="fpDialogBackdrop"></div>
+    <div class="fpDialog">
+      <div class="fpDialogClose">X</div>
+      {if $title}
+        <div class="fpDialogTitle">{$title}</div>
+      {/if}
+      {if $description}
+        <div class="fpDialogDescription">{$description|noAutoescape}</div>
+      {/if}
+      <div class="fpDialogContent">
+        {if $contentHtml}{$contentHtml|noAutoescape}{/if}
+      </div>
+    </div>
+  </div>
+{/template}
